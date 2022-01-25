@@ -1,0 +1,33 @@
+.NavBar {
+    display: flex;
+    flex-flow: row wrap; 
+    align-items: center;
+    justify-content: flex-start;   
+    background-color: #282c34;
+    text-decoration: none;
+}
+
+a {
+    color: #61dafb;
+    text-decoration: none;
+}
+
+.logo, .menu {
+    margin: 40px 0px 40px 100px;
+}
+
+.logo {
+    font-size: 40px;
+}
+
+.menu ul {
+    display: flex;
+    flex-flow: row wrap;     
+    margin: 0px 0px 0px 200px;
+    padding: 0px;
+}
+
+.menu li {
+    padding: 0px 50px;
+}
+
