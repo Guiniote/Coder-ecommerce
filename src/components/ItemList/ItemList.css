@@ -5,3 +5,7 @@
     align-items: stretch;
     margin: 0px 200px;
 }
+
+.listado h1 {    
+    justify-self: center;
+}
