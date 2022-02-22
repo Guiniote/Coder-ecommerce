@@ -63,8 +63,7 @@ function ItemDetailContainer() {
     return (
         <>
             {product ?  
-            <ItemDetail key={product.id} item={product} />
-                // item => <ItemDetail key={item.id} item={itemId ? product.filter( itemFiltered => itemFiltered.category === itemId ) : item } />
+            <ItemDetail key={product.id} item={product} />                
             : <h1>Cargando...</h1> }            
         </>
     );

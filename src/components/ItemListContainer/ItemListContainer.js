@@ -57,14 +57,17 @@ function ItemListContainer({greeting}) {
             });    
     }, [categoryId])
 
+
     const toCart = (itemQuantity) => itemQuantity === 1 ? alert(`Agregaste ${itemQuantity} ítem al carrito!`) : alert(`Agregaste ${itemQuantity} ítems al carrito!`);  
 
+    let filteredProducts = products && products.filter(productsFiltered => productsFiltered.category === categoryId);
+    
     
     return(
         <div>
             <p>{greeting}</p>
             <ItemCount stock="0" initial="1" onAdd={toCart} />            
-            <ItemList items={categoryId ? products.filter( productsFiltered => productsFiltered.category === categoryId ) : products } />
+            {categoryId ? <ItemList items={ filteredProducts } /> : <ItemList items={ products } /> }            
         </div>
     )
 }
