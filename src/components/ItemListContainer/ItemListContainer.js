@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ItemCount from '../ItemCount/ItemCount';
 import ItemList from '../ItemList/ItemList';
 import './ItemListContainer.css';
 import { useParams } from 'react-router-dom';
@@ -58,7 +57,7 @@ function ItemListContainer({greeting}) {
     }, [categoryId])
 
 
-    const toCart = (itemQuantity) => itemQuantity === 1 ? alert(`Agregaste ${itemQuantity} ítem al carrito!`) : alert(`Agregaste ${itemQuantity} ítems al carrito!`);  
+    
 
     let filteredProducts = products && products.filter(productsFiltered => productsFiltered.category === categoryId);
     
@@ -66,7 +65,6 @@ function ItemListContainer({greeting}) {
     return(
         <div>
             <p>{greeting}</p>
-            <ItemCount stock="0" initial="1" onAdd={toCart} />            
             {categoryId ? <ItemList items={ filteredProducts } /> : <ItemList items={ products } /> }            
         </div>
     )
