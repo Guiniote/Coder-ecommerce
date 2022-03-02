@@ -1,7 +1,16 @@
 import React from 'react';
+import { useCart } from '../../context/CardContext';
+
 
 function Cart() {
-    return ( <h1>Hola soy el carrito</h1> );
+
+    const { productInCart } = useCart();
+
+    console.log(productInCart);
+
+    return (
+        <p>Hola, soy el carrito!</p>
+    )
 }
 
 
