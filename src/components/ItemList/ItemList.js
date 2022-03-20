@@ -1,6 +1,7 @@
 import React from "react";
 import './ItemList.css';
 import Item from "../Item/Item";
+import Loader from "../Loader/Loader";
 
 
 function ItemList({items}) {
@@ -9,7 +10,7 @@ function ItemList({items}) {
             {items ?  
             items.map(
                 item => <Item key={item.id} item={item} />
-            ) : <h1>Cargando...</h1> }            
+            ) : <Loader loading={true} /> }            
         </div>
     )
 }

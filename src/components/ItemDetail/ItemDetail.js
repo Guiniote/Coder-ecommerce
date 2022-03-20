@@ -17,7 +17,7 @@ function ItemDetail({ item }) {
 
     return (
         <>        
-            <img src={item.pictureUrl} alt="ProductDetail" width="100%" />
+            <img src={item.pictureUrl} alt="ProductDetail" width="40%" />
             <h2>{item.title}</h2>
             <p>{item.description}</p>
             <h3>{item.price}</h3>                  

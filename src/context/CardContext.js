@@ -7,6 +7,7 @@ export const useCart = () => useContext(CartContext);
 function CartProvider({ children }) {
     
     const [productInCart, setProductInCart] = useState([]);
+    const [howManyIsInCart, setHowManyIsInCart] = useState(0);
 
     const isInCart = (id) => {         
         return (productInCart.filter(cartFiltered => cartFiltered.id === id)).length === 0 ? true : false;        
@@ -15,15 +16,16 @@ function CartProvider({ children }) {
     const addItem = (item, quantity) => {                
         if (isInCart(item.id)) {
             quantity === 1 ?
-                alert(`Agregaste ${quantity} ítem al carrito!`)
-                : alert(`Agregaste ${quantity} ítems al carrito!`);
-            let productToBuy = { ...item, quantity: quantity, }                        
-            setProductInCart([...productInCart, productToBuy]);    
+            alert(`Agregaste ${quantity} ítem al carrito!`)
+            : alert(`Agregaste ${quantity} ítems al carrito!`);
+            setHowManyIsInCart(howManyIsInCart + quantity);
+            let productToBuy = { ...item, quantity: quantity, }           
+            setProductInCart([...productInCart, productToBuy]);
         } else {
             alert('No podés agregar un ítem que ya existe en el carrito');
-        }
+        }        
     }
-
+    
     const howMuchIsInCart = (id) => {
         if (!isInCart(id)) {
             let product = productInCart.filter(cartFiltered => cartFiltered.id === id)            
@@ -31,8 +33,14 @@ function CartProvider({ children }) {
         }
     }
 
+    //const  = (id) => {
+    //
+    //}
+    
     const removeItem = (itemId) => {
-        setProductInCart(productInCart.filter(producto => producto.id !== itemId))
+        let reducingQuantity = productInCart.filter(producto => producto.id === itemId);        
+        setHowManyIsInCart(howManyIsInCart - reducingQuantity[0].quantity);
+        setProductInCart(productInCart.filter(producto => producto.id !== itemId))        
     }
 
     const clear = () => {
@@ -41,7 +49,7 @@ function CartProvider({ children }) {
 
         
     return (        
-        <CartContext.Provider value={{ addItem, removeItem, clear, productInCart, isInCart, howMuchIsInCart }}>
+        <CartContext.Provider value={{ addItem, removeItem, clear, productInCart, isInCart, howMuchIsInCart, howManyIsInCart }}>
             { children }
         </CartContext.Provider>        
      );

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import './ItemDetailContainer.css';
 import { useParams } from 'react-router-dom';
+import Loader from '../Loader/Loader';
 
 
 const mockData = [{
@@ -64,7 +65,7 @@ function ItemDetailContainer() {
         <>
             {product ?  
             <ItemDetail key={product.id} item={product} />                
-            : <h1>Cargando...</h1> }            
+            : <Loader loading={true} /> }            
         </>
     );
 }

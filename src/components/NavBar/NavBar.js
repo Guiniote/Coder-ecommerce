@@ -6,10 +6,12 @@ import React from 'react';
 import CartWidget from '../CartWidget/CartWidget';
 import { Link, NavLink } from 'react-router-dom';
 import './NavBar.css';
+import { useCart } from '../../context/CardContext';
 
 const mockCategories = ["bicicletas", "repuestos", "accesorios"];
 
 function NavBar() {
+    const { howManyIsInCart } = useCart();
     
     return(        
         <div className="NavBar">
@@ -29,7 +31,7 @@ function NavBar() {
                 
             </div>
             <div className="cart">
-                <CartWidget />
+                {howManyIsInCart > 0 && <CartWidget />}
             </div>
         </div>        
         )
