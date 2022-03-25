@@ -2,51 +2,28 @@ import React, { useEffect, useState } from 'react';
 import ItemList from '../ItemList/ItemList';
 import './ItemListContainer.css';
 import { useParams } from 'react-router-dom';
+import { getFirestore } from "../../firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 
-const mockData = [{
-    id: 1, 
-    category: "bicicletas",
-    title: "Mountain Bike", 
-    description: "Descripción 1", 
-    price: 10000, 
-    pictureUrl: "https://borabikes.com.ar/61249-large_default/bicicleta-battle-29-mountain-bike-21-discos-vel-shimano-2020.jpg",
-}, {
-    id: 2, 
-    category: "bicicletas",
-    title: "Urbana", 
-    description: "Descripción 2", 
-    price: 7500, 
-    pictureUrl: "https://www.santafixie.com/blog/wp-content/uploads/2020/02/matte-black-perfil-30-1-1-e1621435452985.jpg",
-}, {
-    id: 3, 
-    category: "repuestos",
-    title: "Playera", 
-    description: "Descripción 3", 
-    price: 5000, 
-    pictureUrl: "https://www.megatone.net/images/articulos/zoom2x/104/BIC0260SIA.jpg",
-}];
 
-
-function ItemListContainer({greeting}) {
+function ItemListContainer({ greeting }) {
 
     const { categoryId } = useParams();
     const [products, setProducts] = useState(null);
 
     useEffect(() => {
-        const asyncMock = new Promise((resolve) => {
-        
-            setTimeout(() => {
-                resolve(mockData);
-            }, 2000);
-        
-        });
-        
-        asyncMock
+        const db = getFirestore();
+
+        const q = categoryId ?
+            query(collection(db, "items"), where("category", "==", categoryId))
+            : query(collection(db, "items"));
+
+        getDocs(q)
             .then(
-                (result) => {
-                    setProducts(result);
-                }, 
+                (snapshot) => {
+                    setProducts(snapshot.docs.map((doc) => doc.data()));
+            }, 
                 (err) => {
                     alert(`Error: ${err}`);
                 }
@@ -58,14 +35,10 @@ function ItemListContainer({greeting}) {
 
 
     
-
-    let filteredProducts = products && products.filter(productsFiltered => productsFiltered.category === categoryId);
-    
-    
     return(
-        <div>
+        <div>            
             <p>{greeting}</p>
-            {categoryId ? <ItemList items={ filteredProducts } /> : <ItemList items={ products } /> }            
+            {products && products.length > 0 ? <ItemList items={products} /> : <h4>Lo siento, no hay productos para esta categoría</h4>}
         </div>
     )
 }

@@ -18,7 +18,7 @@ function ItemDetail({ item }) {
     return (
         <>        
             <img src={item.pictureUrl} alt="ProductDetail" width="40%" />
-            <h2>{item.title}</h2>
+            <h2>{item.name}</h2>
             <p>{item.description}</p>
             <h3>{item.price}</h3>                  
             {!quantityToBuy && isInCart(item.id)?

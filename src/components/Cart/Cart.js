@@ -16,7 +16,7 @@ function Cart() {
                     sumador = sumador + product.price * product.quantity;
                     return (
                         <>  
-                            <li key={index}>{`Producto: ${product.title}     Precio: ${product.price}     Cantidad: ${product.quantity}     Subtotal: ${product.price * product.quantity}`}  <button onClick={() => removeItem(product.id)}>Borrar</button> </li>                            
+                            <li key={index}>{`Producto: ${product.name}     Precio: ${product.price}     Cantidad: ${product.quantity}     Subtotal: ${product.price * product.quantity}`}  <button onClick={() => removeItem(product.id)}>Borrar</button> </li>                            
                         </>
                     );
                 }
