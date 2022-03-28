@@ -2,7 +2,7 @@ import React from 'react';
 import './CartWidget.css';
 import { NavLink } from 'react-router-dom';
 import { FaShoppingCart } from "react-icons/fa";
-import { useCart } from '../../context/CardContext';
+import { useCart } from '../../context/CartContext';
 
 
 function CartWidget() {

@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import CartWidget from '../CartWidget/CartWidget';
 import { Link, NavLink } from 'react-router-dom';
 import './NavBar.css';
-import { useCart } from '../../context/CardContext';
+import { useCart } from '../../context/CartContext';
 import { getFirestore } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 

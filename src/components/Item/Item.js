@@ -3,7 +3,7 @@ import './Item.css';
 import { Link } from 'react-router-dom';
 
 
-function Item({item}) {
+function Item({ item }) {
     return(
         <div className="item">            
             <Link to={`/item/${item.id}`}>

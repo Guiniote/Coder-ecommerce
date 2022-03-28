@@ -8,6 +8,7 @@ function CartProvider({ children }) {
     
     const [productInCart, setProductInCart] = useState([]);
     const [howManyIsInCart, setHowManyIsInCart] = useState(0);
+    const [totalToBuy, setTotalToBuy] = useState(0);
 
     const isInCart = (id) => {         
         return (productInCart.filter(cartFiltered => cartFiltered.id === id)).length === 0 ? true : false;        
@@ -33,9 +34,9 @@ function CartProvider({ children }) {
         }
     }
 
-    //const  = (id) => {
-    //
-    //}
+    const amountToBuy = (total) => {
+        setTotalToBuy(total)
+    }
     
     const removeItem = (itemId) => {
         let reducingQuantity = productInCart.filter(producto => producto.id === itemId);        
@@ -43,13 +44,14 @@ function CartProvider({ children }) {
         setProductInCart(productInCart.filter(producto => producto.id !== itemId))        
     }
 
-    const clear = () => {
+    const clearCart = () => {
         setProductInCart([]);
+        setHowManyIsInCart(0);
     }
 
         
     return (        
-        <CartContext.Provider value={{ addItem, removeItem, clear, productInCart, isInCart, howMuchIsInCart, howManyIsInCart }}>
+        <CartContext.Provider value={{ addItem, removeItem, clearCart, productInCart, isInCart, howMuchIsInCart, howManyIsInCart, amountToBuy, totalToBuy }}>
             { children }
         </CartContext.Provider>        
      );

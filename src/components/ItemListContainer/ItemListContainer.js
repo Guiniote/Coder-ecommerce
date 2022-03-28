@@ -4,6 +4,7 @@ import './ItemListContainer.css';
 import { useParams } from 'react-router-dom';
 import { getFirestore } from "../../firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import Loader from '../Loader/Loader';
 
 
 
@@ -22,7 +23,15 @@ function ItemListContainer({ greeting }) {
         getDocs(q)
             .then(
                 (snapshot) => {
-                    setProducts(snapshot.docs.map((doc) => doc.data()));
+                    let snapshotProducts = snapshot.docs.map((doc) => doc.data());
+                    snapshotProducts.sort(function (a, b) {
+                        if (a.name > b.name) {
+                            return 1;
+                        } else if (a.name < b.name) {
+                            return -1;
+                        } else return 0;
+                    });
+                    setProducts(snapshotProducts);
             }, 
                 (err) => {
                     alert(`Error: ${err}`);
@@ -37,8 +46,8 @@ function ItemListContainer({ greeting }) {
     
     return(
         <div>            
-            <p>{greeting}</p>
-            {products && products.length > 0 ? <ItemList items={products} /> : <h4>Lo siento, no hay productos para esta categoría</h4>}
+            <p>{greeting}</p>            
+            {products ? products.length > 0 ? <ItemList items={products} /> : <h4>Lo siento, no hay productos para esta categoría</h4> : <Loader loading={true} />}            
         </div>
     )
 }
