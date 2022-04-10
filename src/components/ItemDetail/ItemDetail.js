@@ -20,9 +20,10 @@ function ItemDetail({ item }) {
             <img src={item.pictureUrl} alt="ProductDetail" width="40%" />
             <h2>{item.name}</h2>
             <p>{item.description}</p>
-            <h3>{item.price}</h3>                  
+            <h3>{item.price}</h3>          
+            <p>Stock disponible: {item.stock}</p>
             {!quantityToBuy && isInCart(item.id)?
-                <ItemCount stock="10" initial="1" onAdd={toCart} />
+                <ItemCount stock={item.stock} initial="1" onAdd={toCart} />
                 : <p>Ítems en el carrito: {quantityToBuy ? quantityToBuy : alreadyAdded } </p>
             }
 

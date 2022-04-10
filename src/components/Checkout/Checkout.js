@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useCart } from '../../context/CartContext';
-import { collection, addDoc, getFirestore } from "firebase/firestore";
+import { collection, addDoc, getFirestore, writeBatch, doc } from "firebase/firestore";
 
 
 
 function Checkout() {
     const [idCompra, setIdCompra] = useState(null);
-    const { productInCart, totalToBuy, clearCart } = useCart();
+    const { productInCart, totalToBuy, clearCart, howMuchIsInCart, howMuchIsInStock } = useCart();
 
     const sendOrder = () => {
         const order = {
@@ -21,6 +21,12 @@ function Checkout() {
 
         const db = getFirestore();
         const ordersCollection = collection(db, "orders");
+        const batch = writeBatch(db);
+        const itemsToUpdate = productInCart.map(
+            (product) => {
+                return(product.id)
+            }
+        )
     
         addDoc(ordersCollection, order)
             .then(({ id }) => {
@@ -30,6 +36,19 @@ function Checkout() {
             .catch((err) => {
                 alert(`Error no esperado: ${err}`);
             });     
+        
+        itemsToUpdate.forEach((itemId, index) => {
+            const docRef = doc(db, "items", itemId);
+            const itemStock = howMuchIsInStock(itemId);
+            const itemQuantity = howMuchIsInCart(itemId);
+            batch.update(docRef, { stock: itemStock - itemQuantity });
+        });
+
+        batch.commit()
+            .then()
+            .catch((err) => {
+                alert(`Error no esperado: ${err}`);
+            });
     }
         
 

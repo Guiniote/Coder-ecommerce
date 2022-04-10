@@ -34,6 +34,13 @@ function CartProvider({ children }) {
         }
     }
 
+    const howMuchIsInStock = (id) => {
+        if (!isInCart(id)) {
+            let product = productInCart.filter(cartFiltered => cartFiltered.id === id)            
+            return product[0].stock
+        }
+    }
+
     const amountToBuy = (total) => {
         setTotalToBuy(total)
     }
@@ -51,7 +58,7 @@ function CartProvider({ children }) {
 
         
     return (        
-        <CartContext.Provider value={{ addItem, removeItem, clearCart, productInCart, isInCart, howMuchIsInCart, howManyIsInCart, amountToBuy, totalToBuy }}>
+        <CartContext.Provider value={{ addItem, removeItem, clearCart, productInCart, isInCart, howMuchIsInCart, howManyIsInCart, amountToBuy, totalToBuy, howMuchIsInStock }}>
             { children }
         </CartContext.Provider>        
      );

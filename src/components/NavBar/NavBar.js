@@ -1,7 +1,3 @@
-//////////////////////////////////////////////////////////
-/* Librería de estilos (bootstrap/materialize/tailwind) */
-//////////////////////////////////////////////////////////
-
 import React, { useEffect, useState } from 'react';
 import CartWidget from '../CartWidget/CartWidget';
 import { Link, NavLink } from 'react-router-dom';
