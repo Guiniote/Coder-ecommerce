@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import './ItemCount.css';
 
 
 function ItemCount({stock, initial, onAdd}) {
@@ -22,7 +21,7 @@ function ItemCount({stock, initial, onAdd}) {
     
 
     return(
-        <div className="counter">
+        <div className="flex flex-row flex-wrap items-center justify-center">
             <button onClick={remove}> - </button>
             <p>{counter}</p>
             <button onClick={add}> + </button>

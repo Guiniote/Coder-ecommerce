@@ -1,12 +1,11 @@
 import React from "react";
-import './ItemList.css';
-import Item from "../Item/Item";
-import Loader from "../Loader/Loader";
+import Item from "./Item";
+import Loader from "./Loader";
 
 
 function ItemList({items}) {
     return(
-        <div className="listado">            
+        <div className="flex flex-wrap items-stretch justify-between mx-20">            
             {items ?  
             items.map(
                 item => <Item key={item.id} item={item} />

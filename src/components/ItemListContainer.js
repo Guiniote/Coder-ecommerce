@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import ItemList from '../ItemList/ItemList';
-import './ItemListContainer.css';
+import ItemList from './ItemList';
 import { useParams } from 'react-router-dom';
-import { getFirestore } from "../../firebase";
+import { getFirestore } from "../firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import Loader from '../Loader/Loader';
+import Loader from './Loader';
 
 
 
